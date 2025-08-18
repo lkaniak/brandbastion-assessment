@@ -1,0 +1,47 @@
+Implementation:
+
+Create an agent that interfaces with the requester trough a chat interface.
+The agent should appear to the user to be a friendly analyst that specializes in reading data-heavy reports and extracting insights regarding the social media activity on a media brand space.
+
+You can assume in the first interaction with the user, in addition to a text query, the user provides you with a series of charts in pdf (./data/charts) as well as a sample of around 200-2000 comments
+(./data/comments.txt). These charts and comments represent the current charts and comments the user is perusing and may or may not all be related to the query.
+Example queries might be "give me an overview of the points where we're doing worse than in the last reporting period" or "what are people so mad about that we have so many negative comments?"
+
+Your agent should follow this loop:
+- evaluate if the query from the user is analytical in nature. If not, reply to the user politely and re-steer the conversation to be about analytics or follow up on analytics.
+Do not allow the conversation to diverge from these topics;
+
+- if the question regards analytics or follow up on analytics, select an appropriately sized subgroup of charts and comments that are helpful to answer the query.
+Create a context data strucutre to be used in future analysis as a working dataset containing this narrower, more relevant, set of information;
+
+- formulate a plan to answer the query using the information at hand;
+
+- execute the plan from the point above;
+
+- judge if the analysis adequately answered the user query.
+  -If there is not enough information in the context data, ask the user for clarifications or to narrow down their query.
+  -If the answer is informative, reply to the user and ask for follow ups;
+
+
+Observations:
+1. you are allowed to change the format of your inputs if you prefer e.g. to receive the comments inline or the charts in .jpeg. Feel free to manipulate the input format, just let us know you did it.
+2. you are allowed to create regular tools as you see fit. e.g. you may want to create some tool to select a subset of charts or comments and add it in an appropriate data structure,
+or you may want to hard code a few interactions in failure states.
+3. you will be judged in how effectively you handle the architecture of your agent, not on how good the analysis provided by the bot is.
+You don't need to use a powerful and expensive LLM for this challenge (but you may be asked to explain what particular LLM would you ideally use and why)
+4. you can assume there's no failure state on the input. Assume you do get the charts and the comments as well as a query in english.
+There's no need to provision for cases that deviate from these. You also don't need to consider cases where technical failure of third party tools might be an issue,
+like checking if a pdf parser is timing-out or if a database is not connected.
+
+
+Writeup:
+
+1. Please provide a write up with an explanation of your decisions. For example, how did you decide to store your context, how does the decision graph of your agent
+look like (and why you chose it that way), what tools did you chose to code yourself and what components did you leave to the LLM (and why) etc.
+
+2. Write a few lines on how you would handle scale on this problem. If instead of a 200 comments sample you had a 2000000 comments database for the analysis in question,
+how would you handle that? If you had 500 concurrent users? Etc
+
+3. Write a few lines on how you would deploy this solution in a cloud architecture. How would you handle state, latency, race conditions, etc?
+
+4. Write a few lines on how you would handle grounding and hallucination prevention/mitigation for this problem.

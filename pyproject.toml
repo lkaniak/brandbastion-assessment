@@ -1,0 +1,32 @@
+[project]
+name = "brandbastion-assessment"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "agno>=1.7.11",
+    "chromadb>=1.0.17",
+    "fastapi[standard]>=0.116.1",
+    "openai>=1.99.9",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "pypdf>=6.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+    "isort>=6.0.1",
+    "pytest>=8.4.1",
+    "ruff>=0.12.9",
+]
+
+
+[tool.isort]
+profile = "ruff"
+line_length = 100
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 100
