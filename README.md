@@ -23,7 +23,8 @@ This agent uses [Agno](https://docs.agno.com/introduction) as the main framework
 
 ## Considerations
 
-The chat history is not properly working, althrough I have configured it. I am not sure if it is a misconfiguration or it is needed to change the implementation.
+- I had to modify the frontend template app to include a upload feature. This was unexpected in the development of this challenge because I thought the template had one, the "click to upload" feature is not properly working and I had no time to fix it.
+- The chat history is not properly working, althrough I have configured it. I am not sure if it is a misconfiguration or it is needed to change the implementation.
 
 ## Documentation assets
 
@@ -115,4 +116,6 @@ The frontend is a modified template for AI Agents. The base template is found at
 3) run the client: `$ npm run dev`
 
 4) the app is in `localhost:3000`
+
+5) all tests can be done through the interface. There is no need to change the input, it can be uploaded alongside the prompt.
 
