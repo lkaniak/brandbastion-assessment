@@ -9,5 +9,8 @@ class Settings(BaseSettings):
 
     CHROMA_DB_PERSISTENT_PATH: str = "~/.chroma"
 
+    SESSION_ID: str = "user_session_123"
+    USER_ID: str = "user_123"
+
 
 app_settings = Settings()

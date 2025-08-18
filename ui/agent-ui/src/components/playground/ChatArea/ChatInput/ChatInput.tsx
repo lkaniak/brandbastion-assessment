@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { TextArea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { usePlaygroundStore } from '@/store'
-import useAIChatStreamHandler from '@/hooks/useAIStreamHandler'
+import useUnifiedChatHandler from '@/hooks/useUnifiedChatHandler'
 import { useQueryState } from 'nuqs'
 import Icon from '@/components/ui/icon'
 import FileUpload, { type UploadedFile } from './FileUpload'
@@ -12,34 +12,23 @@ import FileUpload, { type UploadedFile } from './FileUpload'
 const ChatInput = () => {
   const { chatInputRef } = usePlaygroundStore()
 
-  const { handleStreamResponse } = useAIChatStreamHandler()
+  const { handleStreamResponse } = useUnifiedChatHandler()
   const [selectedAgent] = useQueryState('agent')
   const [teamId] = useQueryState('team')
   const [inputMessage, setInputMessage] = useState('')
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [showFileUpload, setShowFileUpload] = useState(false)
   const isStreaming = usePlaygroundStore((state) => state.isStreaming)
+
   const handleSubmit = async () => {
     if (!inputMessage.trim() && uploadedFiles.length === 0) return
 
-    const currentMessage = inputMessage
+    const currentMessage = inputMessage || 'Files uploaded'
     setInputMessage('')
 
     try {
-      if (uploadedFiles.length > 0) {
-        // Create FormData with files and message
-        const formData = new FormData()
-        formData.append('message', currentMessage || 'Files uploaded')
-
-        uploadedFiles.forEach((file, index) => {
-          formData.append(`file_${index}`, file.file)
-        })
-
-        await handleStreamResponse(formData)
-        setUploadedFiles([]) // Clear files after upload
-      } else {
-        await handleStreamResponse(currentMessage)
-      }
+      await handleStreamResponse(currentMessage, uploadedFiles)
+      setUploadedFiles([]) // Clear files after upload
     } catch (error) {
       toast.error(
         `Error in handleSubmit: ${
