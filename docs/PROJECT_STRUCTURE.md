@@ -25,11 +25,7 @@ brandbastion-assessment/
 │   │   ├── data_engineer_agent.py     # Data processing and engineering agent
 │   │   └── data_scientist_agent.py    # Advanced analytics and ML agent
 │   │
-│   ├── 📁 api/                        # FastAPI REST API layer
-│   │   ├── __init__.py
-│   │   ├── models.py                  # Pydantic models for API requests/responses
-│   │   ├── routes.py                  # API endpoint definitions
-│   │   └── services.py                # Business logic for API operations
+│   ├── 📁 api/                        # Simple FastAPI REST API layer to connect with the playground frontend
 │   │
 │   ├── 📁 memory/                     # Conversation and knowledge management
 │   │   ├── __init__.py
@@ -48,93 +44,13 @@ brandbastion-assessment/
 │   ├── orchestrator.py                # Main workflow orchestrator
 │   └── server.py                      # FastAPI server entry point
 │
-├── 📁 ui/                             # Frontend application (Next.js)
-│   └── 📁 agent-ui/                   # AI Agent UI template (based on Agno template)
-│       ├── 📁 src/
-│       │   ├── 📁 api/                # Frontend API client
-│       │   │   ├── chat.ts            # Chat API integration
-│       │   │   ├── playground.ts      # Development playground
-│       │   │   └── routes.ts          # API route definitions
-│       │   │
-│       │   ├── 📁 app/                # Next.js app directory
-│       │   │   ├── favicon.ico
-│       │   │   ├── globals.css        # Global styles
-│       │   │   ├── layout.tsx         # Root layout component
-│       │   │   └── page.tsx           # Main page component
-│       │   │
-│       │   ├── 📁 components/         # React components
-│       │   │   ├── 📁 playground/     # Main chat interface
-│       │   │   │   ├── 📁 ChatArea/   # Chat interface components
-│       │   │   │   │   ├── ChatArea.tsx
-│       │   │   │   │   ├── 📁 ChatInput/ # Input components
-│       │   │   │   │   │   ├── ChatInput.tsx
-│       │   │   │   │   │   └── 📁 FileUpload/ # File upload functionality
-│       │   │   │   │   │       ├── FileUpload.tsx
-│       │   │   │   │   │       └── index.ts
-│       │   │   │   │   ├── 📁 Messages/ # Message display components
-│       │   │   │   │   │   ├── AgentThinkingLoader.tsx
-│       │   │   │   │   │   ├── ChatBlankState.tsx
-│       │   │   │   │   │   ├── MessageItem.tsx
-│       │   │   │   │   │   ├── Messages.tsx
-│       │   │   │   │   │   └── 📁 Multimedia/ # Media display components
-│       │   │   │   │   │       ├── 📁 Audios/
-│       │   │   │   │   │       ├── 📁 Images/
-│       │   │   │   │   │       └── 📁 Videos/
-│       │   │   │   │   └── ScrollToBottom.tsx
-│       │   │   │   │
-│       │   │   │   └── 📁 Sidebar/    # Sidebar navigation
-│       │   │   │       ├── EntitySelector.tsx
-│       │   │   │       ├── ModeSelector.tsx
-│       │   │   │       ├── NewChatButton.tsx
-│       │   │   │       ├── Sidebar.tsx
-│       │   │   │       └── 📁 Sessions/ # Chat session management
-│       │   │   │           ├── DeleteSessionModal.tsx
-│       │   │   │           ├── SessionBlankState.tsx
-│       │   │   │           ├── SessionItem.tsx
-│       │   │   │           └── Sessions.tsx
-│       │   │   │
-│       │   │   └── 📁 ui/             # Reusable UI components
-│       │   │       ├── button.tsx
-│       │   │       ├── dialog.tsx
-│       │   │       ├── 📁 icon/       # Icon components
-│       │   │       ├── select.tsx
-│       │   │       ├── skeleton.tsx
-│       │   │       ├── sonner.tsx
-│       │   │       ├── textarea.tsx
-│       │   │       ├── 📁 tooltip/    # Tooltip components
-│       │   │       └── 📁 typography/ # Typography components
-│       │   │           ├── 📁 Heading/
-│       │   │           ├── 📁 MarkdownRenderer/
-│       │   │           └── 📁 Paragraph/
-│       │   │
-│       │   ├── 📁 hooks/              # Custom React hooks
-│       │   │   ├── useAIResponseStream.tsx
-│       │   │   ├── useAIStreamHandler.tsx
-│       │   │   ├── useChatActions.ts
-│       │   │   ├── useSessionLoader.tsx
-│       │   │   └── useUnifiedChatHandler.tsx
-│       │   │
-│       │   ├── lib/                   # Utility libraries
-│       │   ├── store.ts               # State management
-│       │   └── 📁 types/              # TypeScript type definitions
-│       │       └── playground.ts
-│       │
-│       ├── components.json            # UI component configuration
-│       ├── eslint.config.mjs          # ESLint configuration
-│       ├── next.config.ts             # Next.js configuration
-│       ├── package.json               # Node.js dependencies
-│       ├── postcss.config.mjs         # PostCSS configuration
-│       ├── prettier.config.cjs        # Prettier configuration
-│       ├── tailwind.config.ts         # Tailwind CSS configuration
-│       └── tsconfig.json              # TypeScript configuration
+├── 📁 ui/                             # Frontend agent playground template application (Next.js)
 │
-├── 📄 .gitignore                      # Git ignore patterns (Python, Node.js, IDE files)
 ├── 📄 .pre-commit-config.yaml         # Pre-commit hooks configuration
 ├── 📄 .python-version                 # Python version specification (3.12)
 ├── 📄 README.md                       # Project documentation and setup instructions
 ├── 📄 pyproject.toml                  # Python project configuration and dependencies
-├── 📄 uv.lock                         # UV lock file (dependency resolution)
-└── 📁 .venv/                          # Python virtual environment
+└── 📄 uv.lock                         # UV lock file (dependency resolution)
 ```
 
 ## Configuration Files Explanation
@@ -145,7 +61,6 @@ brandbastion-assessment/
 - Pre-commit hooks configuration for code quality
 - Runs `black` (code formatter), `flake8` (linter), and `isort` (import sorter) automatically
 - Ensures consistent code style before commits
-- Note: Currently configured for Poetry but project uses UV
 
 **`.python-version`**
 - Specifies Python version 3.12 for the project
@@ -169,11 +84,6 @@ brandbastion-assessment/
 - Ensures reproducible builds across different environments
 - Similar to `package-lock.json` for Node.js or `poetry.lock` for Poetry
 
-**`.gitignore`**
-- Comprehensive ignore patterns for Python, Node.js, and development tools
-- Excludes virtual environments, cache files, build artifacts, and IDE-specific files
-- Ensures clean repository without unnecessary files
-
 ## Architecture Overview
 
 ### Backend (`src/`)
@@ -183,18 +93,3 @@ The backend implements a multi-agent AI system for social media analytics:
 2. **API Layer** (`api/`): FastAPI REST endpoints for frontend communication
 3. **Memory Layer** (`memory/`): Conversation history and knowledge management
 4. **Workflow Layer** (`workflow/`): Orchestration of agent interactions and analysis steps
-
-### Frontend (`ui/agent-ui/`)
-A Next.js-based chat interface for interacting with the AI agents, featuring:
-- Real-time chat interface
-- File upload capabilities for charts and comments
-- Session management
-- Multimedia message support
-- Modern UI components with Tailwind CSS
-
-### Data (`data/`)
-Sample data for testing and demonstration:
-- PDF charts representing social media analytics
-- Text file with sample social media comments
-
-This architecture enables the AI agent to analyze social media data, extract insights, and provide analytical reports through a user-friendly chat interface.
